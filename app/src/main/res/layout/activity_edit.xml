@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@drawable/background_cullet"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Edit">
+
+        <TextView
+            android:padding="20dp"
+            android:textSize="10pt"
+            android:fontFamily="@font/cabalbold"
+            android:gravity="center"
+            android:text="UPDATE PREVIOUS INPUTS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="ScrollViewCount">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Region:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/region"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Region"
+                            android:minHeight="48dp"
+                            android:padding="8dp"
+                            android:textColorHint="#757575" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Province:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/province"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Province"
+                            android:minHeight="48dp"
+                            android:padding="8dp"
+                            android:textColorHint="#757575" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Municipality:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/municipality"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Municipality"
+                            android:minHeight="48dp"
+                            android:padding="8dp"
+                            android:textColorHint="#757575" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Barangay:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/barangay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Barangay"
+                            android:minHeight="48dp"
+                            android:padding="8dp"
+                            android:textColorHint="#757575" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Street:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/street"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Street"
+                            android:minHeight="48dp"
+                            android:padding="8dp"
+                            android:textColorHint="#757575" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Weight:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/weight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Weight"
+                            android:textColorHint="#757575"
+                            android:inputType="numberDecimal"
+                            android:minHeight="48dp"
+                            android:padding="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Agreed Price per Kilo:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/agreed_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Agreed Price"
+                            android:inputType="numberDecimal"
+                            android:minHeight="48dp"
+                            android:padding="8dp"
+                            android:textColorHint="#757575" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Vendor:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/vendor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Name of Vendor"
+                            android:minHeight="48dp"
+                            android:textColorHint="#757575"
+                            android:padding="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Collector:"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp" />
+
+                        <EditText
+                            android:id="@+id/collector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_input_field"
+                            android:hint="Name of Collector"
+                            android:minHeight="48dp"
+                            android:textColorHint="#757575"
+                            android:padding="8dp" />
+
+
+                        <Button
+                            android:id="@+id/update_btn"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="50dp"
+                            android:text="UPDATE"
+                            android:padding="10dp"
+                            android:background="@drawable/background_green_button"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+
+
+
+
+        </ScrollView>
+
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

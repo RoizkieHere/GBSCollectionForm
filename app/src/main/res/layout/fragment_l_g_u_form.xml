@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/background_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:background="@color/white"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="6dp"
+        android:paddingTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabalbold"
+        android:textColor="@color/black"
+        android:text="COLLECTION FORM TO RECORD COLLECTIONS FROM GBS LGUs"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:fontFamily="@font/cabalbold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Region:"
+                android:textSize="16sp"
+                android:layout_marginTop="5dp" />
+
+            <Spinner
+                android:padding="5dp"
+                android:id="@+id/spinnerRegion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:fontFamily="@font/cabalbold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Province:"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp" />
+
+            <Spinner
+                android:padding="5dp"
+                android:id="@+id/spinnerProvince"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:fontFamily="@font/cabalbold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Municipality:"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp" />
+
+            <Spinner
+                android:padding="5dp"
+                android:id="@+id/spinnerMunicipality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:fontFamily="@font/cabalbold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Barangay:"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp" />
+
+            <Spinner
+                android:padding="5dp"
+                android:id="@+id/spinnerBarangay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+
+            <EditText
+                android:fontFamily="@font/cabal"
+                android:id="@+id/street"
+                android:padding="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Street"/>
+
+            <EditText
+                android:fontFamily="@font/cabal"
+                android:id="@+id/qty"
+                android:padding="8dp"
+                android:inputType="numberDecimal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Weight"/>
+
+            <EditText
+                android:fontFamily="@font/cabal"
+                android:visibility="gone"
+                android:id="@+id/agreed_price"
+                android:padding="8dp"
+                android:text="1.50"
+                android:inputType="numberDecimal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Agreed Price"/>
+
+            <EditText
+                android:fontFamily="@font/cabal"
+                android:id="@+id/vendor"
+                android:padding="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name of Vendor"/>
+
+            <EditText
+                android:fontFamily="@font/cabal"
+                android:id="@+id/collector"
+                android:padding="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name of Collector"/>
+
+            <TextView
+                android:fontFamily="@font/cabalbold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Color:"
+                android:textSize="16sp"
+                android:layout_marginTop="13dp" />
+
+            <Spinner
+                android:padding="5dp"
+                android:id="@+id/spinnerColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:fontFamily="@font/cabalbold"
+                android:id="@+id/submit_button"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/background_green_button"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Submit"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

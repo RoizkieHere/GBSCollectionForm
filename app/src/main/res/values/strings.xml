@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">GBS Collection Form</string>
+    <string name="prime">prime</string>
+    <string name="logo">logo</string>
+    <string name="barangay">Barangay</string>
+    <string name="lgu">LGU</string>
+    <string name="partners">Partners</string>
+    <string name="junkshops">Junkshops</string>
+
+    <string-array name="establishment_type">
+        <item>Sari-sari Store</item>
+        <item>Hotel</item>
+        <item>Restaurant</item>
+        <item>Bar</item>
+        <item>Resort</item>
+    </string-array>
+
+    <string-array name="cullets_color">
+        <item>Flint(Clear)</item>
+        <item>Amber(Brown)</item>
+        <item>Green</item>
+    </string-array>
+
+</resources>

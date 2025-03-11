@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+android:background="@drawable/background_cullet"
+    android:padding="25dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Form">
+
+    <!--TOP BAR-->
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/onload_logo"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:textSize="18sp"
+            android:fontFamily="@font/cabalbold"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ROI ANTONY ABRERA"/>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/exit"
+                android:layout_width="35dp"
+                android:layout_height="60dp"
+                android:src="@drawable/icon_exit"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/background_landing"
+        android:orientation="vertical"
+
+        android:layout_marginTop="12dp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabLayout
+            app:tabIndicatorColor="#008000"
+            app:tabSelectedTextColor="#004d00"
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabIndicatorAnimationMode="fade"
+            app:tabMode="scrollable">
+
+            <com.google.android.material.tabs.TabItem
+                android:fontFamily="@font/cabal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/barangay" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lgu" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/partners" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/junkshops" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <LinearLayout
+            android:clickable="true"
+            android:id="@+id/offline_rec"
+            android:layout_marginTop="10dp"
+            android:focusable="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:fontFamily="@font/cabal"
+                android:textSize="13sp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Previous Record"/>
+            <ImageView
+                android:layout_margin="5dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_previous"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:background="#0000"
+        android:id="@+id/scroll_container"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.viewpager.widget.ViewPager>
+
+
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

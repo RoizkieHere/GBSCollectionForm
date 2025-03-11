@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@drawable/background_cullet"
+    android:gravity="center_horizontal"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+    <ImageView
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="90dp"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="260dp"
+        android:src="@drawable/onload_logo"/>
+
+    <TextView
+        android:id="@+id/err"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp">
+
+        <EditText
+            android:fontFamily="@font/cabal"
+            android:layout_marginBottom="15dp"
+            android:padding="15dp"
+            android:background="@drawable/background_input_field"
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username/Email"/>
+
+        <EditText
+            android:fontFamily="@font/cabal"
+            android:padding="15dp"
+            android:background="@drawable/background_input_field"
+            android:id="@+id/password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:fontFamily="@font/cabal"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="15dp"
+        android:background="@drawable/background_green_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginbtn"
+        android:text="Login"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

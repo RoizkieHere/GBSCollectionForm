@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background_cullet"
+    android:id="@+id/main"
+    android:padding="25dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText"
+    tools:context=".NewOfflineRecord">
+
+    <TextView
+        android:textSize="10pt"
+        android:fontFamily="@font/cabalbold"
+        android:gravity="center"
+        android:text="Offline Records"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:id="@+id/back_button"
+        android:focusable="true"
+        android:src="@drawable/icon_back_arrow"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <HorizontalScrollView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/tble"
+                android:background="@drawable/background_output"
+                android:layout_width="450dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="UselessParent">
+
+                        <TableRow
+                            android:background="#98e698">
+
+                            <TextView
+                                android:visibility="gone"
+                                android:fontFamily="@font/cabal"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:text="Vendor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:fontFamily="@font/cabal"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_weight="5"
+                                android:text="Location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:visibility="gone"
+                                android:fontFamily="@font/cabal"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:text="Street"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:visibility="gone"
+                                android:fontFamily="@font/cabal"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:text="Barangay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:visibility="gone"
+                                android:fontFamily="@font/cabal"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:text="Municipality"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:visibility="gone"
+                                android:fontFamily="@font/cabal"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:text="Region"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:fontFamily="@font/cabal"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_weight="5"
+                                android:text="Date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:fontFamily="@font/cabal"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_weight="4"
+                                android:text="Action"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        </TableRow>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                    </TableLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </HorizontalScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>
