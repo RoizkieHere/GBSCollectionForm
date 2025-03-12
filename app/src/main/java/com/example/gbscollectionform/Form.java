@@ -35,6 +35,8 @@ public class Form extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
+
+
         // Access the SharedPreferences in your next activity
         SharedPreferences sharedPreferences = getSharedPreferences("this_preferences", MODE_PRIVATE);
 
@@ -82,6 +84,7 @@ public class Form extends AppCompatActivity {
             }
         });
 
+
         // Corrected
 
         tabLayout = findViewById(R.id.tablayout);
@@ -100,4 +103,9 @@ public class Form extends AppCompatActivity {
         viewPager.setAdapter(vpAdapter);
 
     }
+
+    @Override
+    public void onBackPressed() {}
+
+
 }

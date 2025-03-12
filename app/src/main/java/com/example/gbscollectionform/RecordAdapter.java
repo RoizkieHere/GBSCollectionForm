@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
@@ -60,9 +64,31 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
             return;
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (record._date != null) {
+                try {
+                    // Define the formatter with the full pattern, including time
+                    DateTimeFormatter fullFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        // Set the visible data if all conditions are met
-        holder._date.setText(String.valueOf(record._date));
+                    // Parse the full date-time string
+                    LocalDateTime dateTime = LocalDateTime.parse(record._date, fullFormatter);
+
+                    // Format the date-time to only display the date
+                    DateTimeFormatter dateOnlyFormatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
+                    String formattedDate = dateTime.format(dateOnlyFormatter);
+
+                    // Set only the date to the holder
+                    holder._date.setText(formattedDate);
+                } catch (DateTimeParseException e) {
+                    // Handle invalid date format gracefully
+                    holder._date.setText("Invalid date format");
+                }
+            } else {
+                // Handle null date gracefully
+                holder._date.setText("Date not available");
+            }
+        }
+
         holder.location.setText(s_location);
 
         holder.del.setOnClickListener(new View.OnClickListener() {
