@@ -69,6 +69,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
 
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
             <TextView
                 android:fontFamily="@font/cabalbold"
                 android:layout_width="match_parent"
@@ -83,6 +87,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:fontFamily="@font/cabalbold"
@@ -99,6 +107,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
 
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
             <TextView
                 android:fontFamily="@font/cabalbold"
                 android:layout_width="match_parent"
@@ -114,6 +126,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
 
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
             <TextView
                 android:fontFamily="@font/cabalbold"
                 android:layout_width="match_parent"
@@ -128,6 +144,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
             <EditText
                 android:fontFamily="@font/cabal"

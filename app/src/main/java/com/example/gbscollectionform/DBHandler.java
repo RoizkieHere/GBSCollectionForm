@@ -20,7 +20,6 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String TABLE_ESTABLISHMENT = "establishment";
     public static final String TABLE_COLLECTOR_ACCOUNT = "collector_account";
 
-
     //Collector Account Table Columns
     public static final String COLA_ID = "id";
     public static final String COLA_NAME = "name";
@@ -29,7 +28,6 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String COLA_USERNAME = "username";
     public static final String COLA_PASSWORD = "password";
     public static final String COLA_DATE = "date";
-
 
     // Collections Table Columns
     public static final String COL_ID = "id";
@@ -81,7 +79,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
 
         //Create Collector Account Table
         String createCollectorAccountTable = "CREATE TABLE " + TABLE_COLLECTOR_ACCOUNT + " (" +
@@ -175,30 +172,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    // Method to add a new junkshop
-    public void addNewJunkshop(String name, String inCharge, String street, String barangay,
-                               String municipality, String province, String region) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COL_JUNKSHOP_NAME, name);
-        values.put(COL_JUNKSHOP_IN_CHARGE, inCharge);
-        values.put(COL_JUNKSHOP_STREET, street);
-        values.put(COL_JUNKSHOP_BARANGAY, barangay);
-        values.put(COL_JUNKSHOP_MUNICIPALITY, municipality);
-        values.put(COL_JUNKSHOP_PROVINCE, province);
-        values.put(COL_JUNKSHOP_REGION, region);
-
-        db.insert(TABLE_JUNKSHOP, null, values);
-
-        db.close();
-
-    }
-
     // Method to add a new collection
     public void addCollection(int collectorId, int establishmentId, int junkshopId,
                               String street, String barangay, String municipality, int classification, String province,
-                              String region, int quantity, double totalPrice, int color, String representative,
+                              String region, double quantity, double totalPrice, int color, String representative,
                               String collector) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -225,45 +202,6 @@ public class DBHandler extends SQLiteOpenHelper {
         } finally {
             db.close();
         }
-    }
-
-    // Method to add a new establishment
-    public void addNewEstablishment(String name, String inCharge, int type, String street,
-                                    String barangay, String municipality, String province, String region) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COL_EST_NAME, name);
-        values.put(COL_EST_IN_CHARGE, inCharge);
-        values.put(COL_EST_TYPE, type);
-        values.put(COL_EST_STREET, street);
-        values.put(COL_EST_BARANGAY, barangay);
-        values.put(COL_EST_MUNICIPALITY, municipality);
-        values.put(COL_EST_PROVINCE, province);
-        values.put(COL_EST_REGION, region);
-
-        try {
-            db.insert(TABLE_ESTABLISHMENT, null, values);
-        } catch (SQLiteException e) {
-            Log.e("DBHandler", "Error inserting establishment data", e);
-        } finally {
-            db.close();
-        }
-    }
-
-    public void edit_collection(int id){
-
-    }
-
-    public void delete_junkshop_record(int id, Context context){
-        SQLiteDatabase db = this.getWritableDatabase();
-        // Execute delete query
-        db.delete(TABLE_JUNKSHOP, COL_JID + " = ?", new String[]{String.valueOf(id)});
-
-       // Intent go_to = new Intent(context, NewOfflineRecord.class);
-     //   context.startActivity(go_to);
-
-        db.close();
     }
 
     public String getPasswordByUsername(String username) {
@@ -338,5 +276,169 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void theCollectorId(String userIdString) {
         col_id =  Integer.parseInt(userIdString);
+    }
+
+    public void addNewJunkshopAndCollection(String name, String vendor, int collectorId, int establishment, int junkshopId, String street, String brgy,
+                                            String municipality, int classification, String province, String region, double int_quant,
+                                            double total_price, int color, String collector ) {
+
+        String jid = null;
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+
+        try {
+            db = this.getReadableDatabase();
+            cursor = db.query(
+                    "junkshop",
+                    new String[]{"id"},
+                    "name = ?",
+                    new String[]{name},
+                    null, null, null
+            );
+
+            if (cursor.moveToFirst()) {
+                jid = cursor.getString(cursor.getColumnIndex("id"));
+
+
+                addCollection(col_id, 0, Integer.parseInt(jid),
+                street, brgy, municipality, 0, province,
+                        region, int_quant, total_price, color, vendor,
+                        collector);
+
+            } else {
+                SQLiteDatabase dbwrite = this.getWritableDatabase();
+
+                ContentValues values = new ContentValues();
+                values.put(COL_JUNKSHOP_NAME, name);
+                values.put(COL_JUNKSHOP_IN_CHARGE, vendor);
+                values.put(COL_JUNKSHOP_STREET, street);
+                values.put(COL_JUNKSHOP_BARANGAY, brgy);
+                values.put(COL_JUNKSHOP_MUNICIPALITY, municipality);
+                values.put(COL_JUNKSHOP_PROVINCE, province);
+                values.put(COL_JUNKSHOP_REGION, region);
+
+                try {
+                    dbwrite.insert(TABLE_JUNKSHOP, null, values);
+                } catch (SQLiteException e) {
+                    Log.e("DBHandler", "Error inserting establishment data", e);
+                } finally {
+
+                    db = this.getReadableDatabase();
+                    cursor = db.query(
+                            "junkshop",
+                            new String[]{"id"},
+                            "name = ?",
+                            new String[]{name},
+                            null, null, null
+                    );
+
+                    if (cursor.moveToFirst()) {
+                        jid = cursor.getString(cursor.getColumnIndex("id"));
+
+                        addCollection(col_id, 0, Integer.parseInt(jid),
+                                street, brgy, municipality, 0, province,
+                                region, int_quant, total_price, color, vendor,
+                                collector);
+
+                    }
+
+                        db.close();
+                }
+
+
+            }
+
+
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+
+    }
+
+    public void addNewEstAndCollection(String name, String vendor, int collectorId, int establishment, int junkshopId, String street, String brgy,
+                                       String municipality, int classification, String province, String region, double int_quant,
+                                       double total_price, int color, String collector ) {
+
+        String eid = null;
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+
+        try {
+            db = this.getReadableDatabase();
+            cursor = db.query(
+                    "establishment",
+                    new String[]{"id"},
+                    "name = ?",
+                    new String[]{name},
+                    null, null, null
+            );
+
+            if (cursor.moveToFirst()) {
+                eid = cursor.getString(cursor.getColumnIndex("id"));
+
+
+                addCollection(col_id, Integer.parseInt(eid), 0,
+                        street, brgy, municipality, classification, province,
+                        region, int_quant, total_price, color, vendor,
+                        collector);
+
+            } else {
+                SQLiteDatabase dbwrite = this.getWritableDatabase();
+
+                ContentValues values = new ContentValues();
+                values.put(COL_EST_NAME, name);
+                values.put(COL_EST_IN_CHARGE, vendor);
+                values.put(COL_EST_TYPE, classification);
+                values.put(COL_EST_STREET, street);
+                values.put(COL_EST_BARANGAY, brgy);
+                values.put(COL_EST_MUNICIPALITY, municipality);
+                values.put(COL_EST_PROVINCE, province);
+                values.put(COL_EST_REGION, region);
+
+                try {
+                    dbwrite.insert(TABLE_ESTABLISHMENT, null, values);
+                } catch (SQLiteException e) {
+                    Log.e("DBHandler", "Error inserting establishment data", e);
+                } finally {
+
+                    db = this.getReadableDatabase();
+                    cursor = db.query(
+                            "establishment",
+                            new String[]{"id"},
+                            "name = ?",
+                            new String[]{name},
+                            null, null, null
+                    );
+
+                    if (cursor.moveToFirst()) {
+                        eid = cursor.getString(cursor.getColumnIndex("id"));
+
+                        addCollection(col_id, Integer.parseInt(eid), 0,
+                                street, brgy, municipality, classification, province,
+                                region, int_quant, total_price, color, vendor,
+                                collector);
+
+                    }
+
+                    db.close();
+                }
+
+
+            }
+
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+
     }
 }

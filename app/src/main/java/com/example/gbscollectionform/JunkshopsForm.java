@@ -126,7 +126,7 @@ public class JunkshopsForm extends Fragment {
                                 }
 
                                 // Convert values and calculate total price
-                                int int_quant = Integer.parseInt(s_qty);
+                                double int_quant =Double.parseDouble(s_qty);
                                 int color = 0;
                                 if (s_color.equals("Flint(Clear)")) {
                                     color += 1;
@@ -139,10 +139,17 @@ public class JunkshopsForm extends Fragment {
                                 double d_agreedPrice = Double.parseDouble(s_agreedprice);
                                 double total_price = d_agreedPrice * int_quant;
 
-                                // Insert data into the database
+
+                                dbHandler.addNewJunkshopAndCollection(s_name, s_vendor,
+                                        1, 0, 1, s_street, s_barangay, s_municipality, 0, s_province, s_region, int_quant, total_price, color, s_collector);
+
+
+                                /* Insert data into the database
                                 dbHandler.addNewJunkshop(s_name, s_vendor, s_street, s_barangay, s_municipality, s_province, s_region);
                                 dbHandler.addCollection(1, 0, 1, s_street, s_barangay, s_municipality, 0, s_province, s_region, int_quant, total_price, color, s_vendor, s_collector);
 
+
+                                 */
                                 // Optional: Show a success message
                                 Toast.makeText(con, "Collection submitted successfully!", Toast.LENGTH_SHORT).show();
                             }

@@ -95,7 +95,7 @@ public class LGUForm extends Fragment {
                                 s_collector = vendor.getText().toString();
                                 s_color = spinner.getSelectedItem().toString();
 
-                                int int_quant = Integer.parseInt(s_qty);
+                                double int_quant = Double.parseDouble(s_qty);
                                 int color = 0;
 
                                 if (s_color.equals("Flint(Clear)")) {

@@ -117,7 +117,7 @@ public class PartnersForm extends Fragment {
                                 s_color = spinner.getSelectedItem().toString();
                                 s_type = est_type.getSelectedItem().toString();
 
-                                int int_quant = Integer.parseInt(s_qty);
+                                Double int_quant = Double.parseDouble(s_qty);
                                 int color = 0;
                                 int estab = 0;
 
@@ -150,11 +150,15 @@ public class PartnersForm extends Fragment {
                                 double d_agreedPrice = Double.parseDouble(s_agreedprice);
                                 double total_price = d_agreedPrice * int_quant;
 
-                                dbHandler.addCollection(1, 1, 0, s_street, s_barangay, s_municipality,
+                                dbHandler.addNewEstAndCollection(s_name, s_vendor,
+                                        1, 0, 0, s_street, s_barangay, s_municipality, estab, s_province, s_region, int_quant, total_price, color, s_collector);
+
+
+                                /*dbHandler.addCollection(1, 1, 0, s_street, s_barangay, s_municipality,
                                         0, s_province, s_region, int_quant, total_price, color, s_vendor, s_collector);
 
                                 dbHandler.addNewEstablishment(s_name, s_vendor, estab, s_street, s_barangay, s_municipality, s_province, s_region);
-
+                                */
                                 // Optional: Show a success message
                                 Toast.makeText(con, "Submission successful!", Toast.LENGTH_SHORT).show();
                             }
