@@ -35,8 +35,6 @@ public class Form extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
-
-
         // Access the SharedPreferences in your next activity
         SharedPreferences sharedPreferences = getSharedPreferences("this_preferences", MODE_PRIVATE);
 
@@ -48,10 +46,7 @@ public class Form extends AppCompatActivity {
         DBHandler dbHandler = new DBHandler(Form.this);
         dbHandler.theCollectorId(userId);
 
-
         name = findViewById(R.id.name);
-
-
 
         name.setText(names);
 

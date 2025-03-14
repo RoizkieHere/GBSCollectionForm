@@ -6,6 +6,7 @@
     <string name="lgu">LGU</string>
     <string name="partners">Partners</string>
     <string name="junkshops">Junkshops</string>
+    <string name="domain">192.168.100.224</string>
 
     <string-array name="establishment_type">
         <item>Sari-sari Store</item>

@@ -151,7 +151,7 @@ public class PartnersForm extends Fragment {
                                 double total_price = d_agreedPrice * int_quant;
 
                                 dbHandler.addNewEstAndCollection(s_name, s_vendor,
-                                        1, 0, 0, s_street, s_barangay, s_municipality, estab, s_province, s_region, int_quant, total_price, color, s_collector);
+                                        1, 0, 0, s_street, s_barangay, s_municipality, estab, s_province, s_region, int_quant, total_price, color, s_collector, con);
 
 
                                 /*dbHandler.addCollection(1, 1, 0, s_street, s_barangay, s_municipality,

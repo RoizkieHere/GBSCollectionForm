@@ -141,7 +141,7 @@ public class JunkshopsForm extends Fragment {
 
 
                                 dbHandler.addNewJunkshopAndCollection(s_name, s_vendor,
-                                        1, 0, 1, s_street, s_barangay, s_municipality, 0, s_province, s_region, int_quant, total_price, color, s_collector);
+                                        1, 0, 1, s_street, s_barangay, s_municipality, 0, s_province, s_region, int_quant, total_price, color, s_collector, con);
 
 
                                 /* Insert data into the database

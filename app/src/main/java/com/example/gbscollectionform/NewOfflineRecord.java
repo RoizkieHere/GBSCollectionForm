@@ -1,11 +1,13 @@
 package com.example.gbscollectionform;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,13 +55,17 @@ import static com.example.gbscollectionform.DBHandler.TABLE_ESTABLISHMENT;
 import static com.example.gbscollectionform.DBHandler.TABLE_JUNKSHOP;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 
 
 import androidx.activity.EdgeToEdge;
@@ -68,11 +74,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class NewOfflineRecord extends AppCompatActivity {
 
     private DBHandler dbHandler;
 
+    String domain = "192.168.100.224";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +109,220 @@ public class NewOfflineRecord extends AppCompatActivity {
             }
         });
 
+        Button save_online = findViewById(R.id.save_online);
+        save_online.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Save Online")
+                        .setMessage("Are you sure you want to save the record online?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                sendAllJunkshopData();
+                                sendAllEstData();
+                                sendAllCollectionData();
+
+                                DBHandler dbHelper = new DBHandler(NewOfflineRecord.this);
+                                dbHelper.delete_AllC_record(NewOfflineRecord.this
+                                );
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
+
+    }
+    private void sendAllJunkshopData() {
+        String url = "https://" + domain + "/Collection/api/sync_junkshop.php";
+        RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
+
+        // Fetch all data from SQLite
+        DBHandler dbHandler = new DBHandler(this);
+        List<Map<String, String>> dataList = dbHandler.getAllJunkshopData();
+
+        // Build POST parameters as a single String
+        StringBuilder postDataBuilder = new StringBuilder();
+        int rowCount = 0;
+
+        for (Map<String, String> row : dataList) {
+            for (Map.Entry<String, String> entry : row.entrySet()) {
+                try {
+                    // Ensure the key and value are not null before encoding
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+
+                    if (key != null && value != null) {
+                        // Properly encode each key and value
+                        String encodedKey = "row" + rowCount + "_" + URLEncoder.encode(key, "UTF-8");
+                        String encodedValue = URLEncoder.encode(value, "UTF-8");
+                        postDataBuilder.append(encodedKey).append("=").append(encodedValue).append("&");
+                    } else {
+                        Log.e("NullValue", "Null key or value encountered. Skipping...");
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    Log.e("EncodingError", "Error encoding parameter", e);
+                }
+            }
+            rowCount++;
+        }
+
+        String postData = postDataBuilder.toString();
+
+        // Remove the trailing '&'
+        if (postData.endsWith("&")) {
+            postData = postData.substring(0, postData.length() - 1);
+        }
+
+        final String finalPostData = postData;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            Log.d("ServerResponse", response); // Log the server response
+        }, error -> {
+            Log.e("VolleyError", error.toString()); // Log errors
+        }) {
+            @Override
+            public byte[] getBody() {
+                return finalPostData.getBytes(StandardCharsets.UTF_8);
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+        };
+
+        // Add the request to the queue
+        queue.add(stringRequest);
+    }
+
+    private void sendAllEstData() {
+        String url = "https://" + domain + "Collection/api/sync_establishment.php";
+        RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
+
+        // Fetch all data from SQLite
+        DBHandler dbHandler = new DBHandler(this);
+        List<Map<String, String>> dataList = dbHandler.getAllEstData();
+
+        // Build POST parameters as a single String
+        StringBuilder postDataBuilder = new StringBuilder();
+        int rowCount = 0;
+
+        for (Map<String, String> row : dataList) {
+            for (Map.Entry<String, String> entry : row.entrySet()) {
+                try {
+                    // Ensure the key and value are not null before encoding
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+
+                    if (key != null && value != null) {
+                        // Properly encode each key and value
+                        String encodedKey = "row" + rowCount + "_" + URLEncoder.encode(key, "UTF-8");
+                        String encodedValue = URLEncoder.encode(value, "UTF-8");
+                        postDataBuilder.append(encodedKey).append("=").append(encodedValue).append("&");
+                    } else {
+                        Log.e("NullValue", "Null key or value encountered. Skipping...");
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    Log.e("EncodingError", "Error encoding parameter", e);
+                }
+            }
+            rowCount++;
+        }
+
+        String postData = postDataBuilder.toString();
+
+        // Remove the trailing '&'
+        if (postData.endsWith("&")) {
+            postData = postData.substring(0, postData.length() - 1);
+        }
+
+        final String finalPostData = postData;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            Log.d("ServerResponse", response); // Log the server response
+        }, error -> {
+            Log.e("VolleyError", error.toString()); // Log errors
+        }) {
+            @Override
+            public byte[] getBody() {
+                return finalPostData.getBytes(StandardCharsets.UTF_8);
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+        };
+
+        // Add the request to the queue
+        queue.add(stringRequest);
+    }
+
+    private void sendAllCollectionData() {
+        String url = "https://"  + domain + "/Collection/api/sync_collection.php";
+        RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
+
+        // Fetch all data from SQLite
+        DBHandler dbHandler = new DBHandler(this);
+        List<Map<String, String>> dataList = dbHandler.getAllCollectionData();
+
+        // Build POST parameters as a single String
+        StringBuilder postDataBuilder = new StringBuilder();
+        int rowCount = 0;
+
+        for (Map<String, String> row : dataList) {
+            for (Map.Entry<String, String> entry : row.entrySet()) {
+                try {
+                    // Ensure the key and value are not null before encoding
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+
+                    if (key != null && value != null) {
+                        // Properly encode each key and value
+                        String encodedKey = "row" + rowCount + "_" + URLEncoder.encode(key, "UTF-8");
+                        String encodedValue = URLEncoder.encode(value, "UTF-8");
+                        postDataBuilder.append(encodedKey).append("=").append(encodedValue).append("&");
+                    } else {
+                        Log.e("NullValue", "Null key or value encountered. Skipping...");
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    Log.e("EncodingError", "Error encoding parameter", e);
+                }
+            }
+            rowCount++;
+        }
+
+        String postData = postDataBuilder.toString();
+
+        // Remove the trailing '&'
+        if (postData.endsWith("&")) {
+            postData = postData.substring(0, postData.length() - 1);
+        }
+
+        final String finalPostData = postData;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            Log.d("ServerResponse", response); // Log the server response
+        }, error -> {
+            Log.e("VolleyError", error.toString()); // Log errors
+        }) {
+            @Override
+            public byte[] getBody() {
+                return finalPostData.getBytes(StandardCharsets.UTF_8);
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+        };
+
+        // Add the request to the queue
+        queue.add(stringRequest);
     }
 
     @SuppressLint("Range")

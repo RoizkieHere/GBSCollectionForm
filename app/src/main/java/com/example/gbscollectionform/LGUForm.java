@@ -110,7 +110,7 @@ public class LGUForm extends Fragment {
                                 double total_price = d_agreedPrice * int_quant;
 
                                 dbHandler.addCollection(1, 0, 0, s_street, null, s_municipality,
-                                        0, s_province, s_region, int_quant, total_price, color, s_vendor, s_collector);
+                                        0, s_province, s_region, int_quant, total_price, color, s_vendor, s_collector, con);
 
                                 // Optional: Display a success message
                                 Toast.makeText(con, "Collection submitted successfully!", Toast.LENGTH_SHORT).show();

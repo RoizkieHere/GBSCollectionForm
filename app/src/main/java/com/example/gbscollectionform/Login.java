@@ -37,10 +37,6 @@ public class Login extends AppCompatActivity {
     EditText username;
     EditText password;
     TextView err;
-    Button loginBtn;
-
-    String url;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +49,9 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
         err = findViewById(R.id.err);
 
-        url = "https://192.168.100.224/Collection/api/get_credentials.php";
-
         get_credentials();
+        get_establishment();
+        get_junkshop();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,10 +122,117 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    private void get_junkshop() {
+
+        String url = "https://192.168.100.104/Collection/api/get_junkshop.php";
+        // Initialize the request queue
+        RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
+
+        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                DBHandler dbHandler = new DBHandler(Login.this);
+
+                String[] row = response.split(";;");
+
+                for (String column : row) {
+                    String[] data = column.split(";");
+
+                    // Validate data length
+                    if (data.length >= 7) {
+                        try {
+                            int sid = Integer.parseInt(data[0]);
+                            dbHandler.addNewOfflineJs(sid, data[1], data[2], data[3],
+                                    data[4], data[5], data[6], data[7], data[8], data[9] );
+                        } catch (NumberFormatException e) {
+                            Log.e("DBHandler", "Error parsing collector ID", e);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            Log.e("DBHandler", "Data format error", e);
+                        }
+                    } else {
+                        Log.e("DBHandler", "Invalid data format: " + column);
+                    }
+                }
 
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+        };
+
+        // Add the request to the request queue
+        queue.add(sr);
+
+    }
 
     private void get_credentials() {
+
+        String url = "https://192.168.100.104/Collection/api/get_credentials.php";
+        // Initialize the request queue
+        RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
+
+        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                DBHandler dbHandler = new DBHandler(Login.this);
+
+                String[] row = response.split(";;");
+
+                for (String column : row) {
+                    String[] data = column.split(";");
+
+                    // Validate data length
+                    if (data.length >= 7) {
+                        try {
+                            int sid = Integer.parseInt(data[0]);
+                            dbHandler.addNewOfflineCollector(sid, data[1], data[2], data[3],
+                                    data[4], data[5], data[6]);
+                        } catch (NumberFormatException e) {
+                            Log.e("DBHandler", "Error parsing collector ID", e);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            Log.e("DBHandler", "Data format error", e);
+                        }
+                    } else {
+                        Log.e("DBHandler", "Invalid data format: " + column);
+                    }
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        // Add the request to the request queue
+        queue.add(sr);
+
+    }
+
+    private void get_establishment() {
+
+        String url = "https://192.168.100.104/Collection/api/get_establishment.php";
 
         // Initialize the request queue
         RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
@@ -149,8 +252,8 @@ public class Login extends AppCompatActivity {
                     if (data.length >= 7) {
                         try {
                             int sid = Integer.parseInt(data[0]);
-                            dbHandler.addNewCollector(sid, data[1], data[2], data[3],
-                                    data[4], data[5], data[6]);
+                            dbHandler.addNewOfflineEst(sid, data[1], data[2], data[3],
+                                    data[4], data[5], data[6], data[7], data[8], data[9], data[10]);
                         } catch (NumberFormatException e) {
                             Log.e("DBHandler", "Error parsing collector ID", e);
                         } catch (ArrayIndexOutOfBoundsException e) {
@@ -182,10 +285,6 @@ public class Login extends AppCompatActivity {
 
         // Add the request to the request queue
         queue.add(sr);
-
-
-
-
 
     }
 }
