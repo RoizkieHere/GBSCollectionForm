@@ -200,7 +200,7 @@ public class NewOfflineRecord extends AppCompatActivity {
     }
 
     private void sendAllEstData() {
-        String url = "https://" + domain + "Collection/api/sync_establishment.php";
+        String url = "https://" + domain + "/Collection/api/sync_establishment.php";
         RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
 
         // Fetch all data from SQLite

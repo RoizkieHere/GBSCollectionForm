@@ -178,7 +178,7 @@ public class Login extends AppCompatActivity {
 
     private void get_credentials() {
 
-        String url = "https://192.168.100.104/Collection/api/get_credentials.php";
+        String url = "https://192.168.100.224/Collection/api/get_credentials.php";
         // Initialize the request queue
         RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
 

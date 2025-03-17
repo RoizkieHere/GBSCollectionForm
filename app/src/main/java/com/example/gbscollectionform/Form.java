@@ -1,5 +1,6 @@
 package com.example.gbscollectionform;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -58,16 +61,45 @@ public class Form extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Clear shared preferences and log out
-                SharedPreferences sharedPreferences = getSharedPreferences("this_preferences", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
 
-                // Start login activity after logging out
-                Intent intent = new Intent(Form.this, Login.class);
-                startActivity(intent);
-                finish(); // Call finish to close the current activity
+                // Create and show the confirmation dialog
+                new AlertDialog.Builder(Form.this)
+                        .setTitle("Signing Out")
+                        .setMessage("Are you sure you want to Logout")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // Clear shared preferences and log out
+                                SharedPreferences sharedPreferences = getSharedPreferences("this_preferences", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.clear();
+                                editor.apply();
+
+                                // Start login activity after logging out
+                                Intent intent = new Intent(Form.this, Login.class);
+                                startActivity(intent);
+                                finish(); // Call finish to close the current activity
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss(); // Close the dialog if the user selects "No"
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+
+
+
+
+
+
+
+
             }
         });
 
