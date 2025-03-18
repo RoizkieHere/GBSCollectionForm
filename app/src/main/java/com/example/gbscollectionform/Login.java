@@ -124,7 +124,7 @@ public class Login extends AppCompatActivity {
 
     private void get_junkshop() {
 
-        String url = "https://192.168.100.104/Collection/api/get_junkshop.php";
+        String url = "https://bbpdbicol.com/collection/api/get_junkshop.php";
         // Initialize the request queue
         RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
 
@@ -178,7 +178,7 @@ public class Login extends AppCompatActivity {
 
     private void get_credentials() {
 
-        String url = "https://192.168.100.224/Collection/api/get_credentials.php";
+        String url = "https://bbpdbicol.com/collection/api/get_credentials.php";
         // Initialize the request queue
         RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
 
@@ -232,7 +232,7 @@ public class Login extends AppCompatActivity {
 
     private void get_establishment() {
 
-        String url = "https://192.168.100.104/Collection/api/get_establishment.php";
+        String url = "https://bbpdbicol.com/collection/api/get_establishment.php";
 
         // Initialize the request queue
         RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());

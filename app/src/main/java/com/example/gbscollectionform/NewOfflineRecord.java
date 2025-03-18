@@ -84,7 +84,7 @@ public class NewOfflineRecord extends AppCompatActivity {
 
     private DBHandler dbHandler;
 
-    String domain = "192.168.100.224";
+    String domain = "bbpdbicol.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,7 +200,7 @@ public class NewOfflineRecord extends AppCompatActivity {
     }
 
     private void sendAllEstData() {
-        String url = "https://" + domain + "/Collection/api/sync_establishment.php";
+        String url = "https://" + domain + "/collection/api/sync_establishment.php";
         RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
 
         // Fetch all data from SQLite
@@ -263,7 +263,7 @@ public class NewOfflineRecord extends AppCompatActivity {
     }
 
     private void sendAllCollectionData() {
-        String url = "https://"  + domain + "/Collection/api/sync_collection.php";
+        String url = "https://"  + domain + "/collection/api/sync_collection.php";
         RequestQueue queue = Volley.newRequestQueue(this, new CustomHurlStack());
 
         // Fetch all data from SQLite
